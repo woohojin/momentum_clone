@@ -2,14 +2,16 @@ const todoForm = document.getElementById("todo-form");
 const todoList = document.getElementById("todo-list");
 const todoInput = todoForm.querySelector("#todo-form input");
 
-const todos = [];
+let todos = [];
+
+const TODOS_KEY = "todos";
 function deleteTodo(event) {
   const li = event.target.parentElement;
   li.remove();
 }
 
 function saveTodos() {
-  localStorage.setItem("todos", JSON.stringify(todos));
+  localStorage.setItem(TODOS_KEY, JSON.stringify(todos));
 }
 
 function makeTodo(newTodo) {
@@ -37,3 +39,11 @@ function handleTodoSubmit(event) {
 }
 
 todoForm.addEventListener("submit", handleTodoSubmit);
+
+const savedToDos = localStorage.getItem(TODOS_KEY);
+
+if (savedToDos !== null) {
+  const parsedToDos = JSON.parse(savedToDos);
+  todos = parsedToDos;
+  parsedToDos.forEach(makeTodo);
+}
