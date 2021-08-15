@@ -5,13 +5,15 @@ const todoInput = todoForm.querySelector("#todo-form input");
 let todos = [];
 
 const TODOS_KEY = "todos";
-function deleteTodo(event) {
-  const li = event.target.parentElement;
-  li.remove();
-}
 
 function saveTodos() {
   localStorage.setItem(TODOS_KEY, JSON.stringify(todos));
+}
+
+function deleteTodo(event) {
+  const li = event.target.parentElement;
+  console.log(li.id);
+  li.remove();
 }
 
 function makeTodo(newTodo) {
